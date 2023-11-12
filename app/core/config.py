@@ -4,10 +4,11 @@ from pydantic import BaseSettings, EmailStr
 
 
 class Settings(BaseSettings):
-    app_title: str
-    app_description: str
+    # Не проходит тесты на платформе без умолчательных значений
+    app_title: str = 'QR_Kot'
+    app_description: str = 'Приложение для Благотворительного фонда'
     database_url: str = 'sqlite+aiosqlite:///./fastapi.db'
-    secret: str
+    secret: str = 'SECRET'
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
 
