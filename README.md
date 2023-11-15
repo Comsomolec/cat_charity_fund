@@ -75,5 +75,9 @@ alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
+После запуска сервера можно ознакомиться с доступными командами:
+* [Swagger](http://127.0.0.1:8000/docs)
+* [Redoc](http://127.0.0.1:8000/redoc)
+
 ### Автор
-<a href="https://github.com/Comsomolec" target="_blank">Сабирзянов_Сергей</a>
+[Сабирзянов_Сергей](https://github.com/Comsomolec)

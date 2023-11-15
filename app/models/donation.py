@@ -1,15 +1,14 @@
 from sqlalchemy import Column, ForeignKey, Integer, Text
 
-from app.models.base import AbstractModel
+from app.models.base import BaseInvestModel
 
 
 PATTERN = (
-    'Пожертвование: Внес {user}. Сумма {amount}. Дата {date}. '
-    'Отметка о закрытии: {fully_invested}'
+    'Пожертвование внес: {user}. {data}'
 )
 
 
-class Donation(AbstractModel):
+class Donation(BaseInvestModel):
     __tablename__ = 'donation'
 
     user_id = Column(Integer, ForeignKey('user.id'))
@@ -18,7 +17,5 @@ class Donation(AbstractModel):
     def __repr__(self):
         return PATTERN.format(
             user=self.user_id,
-            amount=self.invested_amount,
-            date=self.create_date,
-            fully_invested=self.fully_invested
+            data=super().__repr__()
         )

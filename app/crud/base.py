@@ -43,6 +43,8 @@ class CRUDBase:
         obj_in_data = obj_in.dict()
         if user is not None:
             obj_in_data['user_id'] = user.id
+        if 'invested_amount' not in obj_in_data:
+            obj_in_data['invested_amount'] = 0
         db_obj = self.model(**obj_in_data)
         session.add(db_obj)
         if commit:
