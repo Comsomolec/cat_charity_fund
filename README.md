@@ -18,10 +18,9 @@
 
 ## Документация
 Для просмотра документации
-* Скачайте файл openapi.json из корневой директории проекта
-* <a href="https://redocly.github.io/redoc/" target="_blank">Зайдите на сайт</a>
+* [Скачайте файл openapi.json из корневой директории проекта](../openapi.json)
+* [Зайдите на сайт](https://redocly.github.io/redoc/)
 * Вверху страницы есть кнопка Upload a file, нажмите её и загрузите скачанный файл
-
 
 ## Как запустить проект
 Клонировать репозиторий и перейти в него в командной строке:
@@ -64,18 +63,7 @@ pip install -r requirements.txt
 touch .env
 ```
 
-### Создаем базу данных
-
-Создание базы
-
-```
-alembic init --template async alembic
-```
-
-Первая миграция
-```
-alembic revision --autogenerate -m "First migration"
-```
+### База данных
 
 Применение изменений (перед запуском проверьте файл миграции в папке ../alembic/versions)
 ```
@@ -86,3 +74,6 @@ alembic upgrade head
 ```
 uvicorn app.main:app --reload
 ```
+
+### Автор
+<a href="https://github.com/Comsomolec" target="_blank">Сабирзянов_Сергей</a>

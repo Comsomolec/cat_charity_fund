@@ -49,10 +49,10 @@ async def check_project_invested_amount(
     charity_project_id: int,
     session: AsyncSession,
 ) -> None:
-    invested_amount = await charityproject_crud.get_project_invested_amount(
+    charity_project = await charityproject_crud.get(
         charity_project_id, session
     )
-    if invested_amount:
+    if charity_project.invested_amount:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
             detail=PROJECT_INVESTED_AMOUNT_IS_NOT_NULL_ERROR
@@ -64,10 +64,10 @@ async def check_project_full_amount(
     new_full_amount: int,
     session: AsyncSession,
 ) -> None:
-    invested_amount = await charityproject_crud.get_project_invested_amount(
+    charity_project = await charityproject_crud.get(
         charity_project_id, session
     )
-    if new_full_amount < invested_amount:
+    if new_full_amount < charity_project.invested_amount:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
             detail=PROJECT_FULL_AMOUNT_IS_LOWER_ERROR
@@ -78,10 +78,10 @@ async def check_project_status(
     charity_project_id: int,
     session: AsyncSession,
 ) -> None:
-    fully_invested = await charityproject_crud.get_project_status(
+    charity_project = await charityproject_crud.get(
         charity_project_id, session
     )
-    if fully_invested:
+    if charity_project.fully_invested:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
             detail=PROJECT_CLOSE_ERROR

@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import APIRouter, Depends
 
 from app.core.db import get_async_session
-from app.crud import charityproject_crud
+from app.crud import charityproject_crud, donation_crud
 from app.core.user import current_superuser
 from app.schemas.charityproject import (
     CharityProjectCreate,
@@ -45,9 +45,16 @@ async def create_charityproject(
 ):
     await check_name_duplicate(charity_project.name, session)
     charity_project = await charityproject_crud.create(
-        charity_project, session
+        charity_project, session, commit=False
     )
-    charity_project = await investment_process(charity_project, session)
+    session.add_all(
+        investment_process(
+            target=charity_project,
+            sources=await donation_crud.get_multi_open_objects(session)
+        )
+    )
+    await session.commit()
+    await session.refresh(charity_project)
     return charity_project
 
 
